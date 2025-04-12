@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Features from "../components/HomePage/Features";
 import Guide from "../components/HomePage/Guide";
 import HeroSection from "../components/HomePage/HeroSection";
@@ -20,6 +21,10 @@ const HomePage = () => {
 
       <div>
         <Features/>
+      </div>
+
+      <div>
+        <Footer/>
       </div>
     </div>
   );

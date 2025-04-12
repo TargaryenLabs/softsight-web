@@ -15,7 +15,7 @@ const HeroSection = () => {
         </p>
         {/* Navigation */}
         <a
-          href="/Forecast"
+          href="/forecast"
           className="w-[338px] h-[71px] flex justify-center items-center border-2 hover:bg-white bg-blue-50/10 text-white border-white rounded-3xl mt-[80px] group transition-all  duration-500"
         >
           <p className="text-[20px] font-[600] group-hover:text-[#1E73E8] text-white">
