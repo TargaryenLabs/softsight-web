@@ -1,5 +1,7 @@
-"use client";
+'use client';
+
 import { PiArrowFatLinesDownFill } from "react-icons/pi";
+import { MdOutlineDoneOutline } from "react-icons/md";
 import { motion } from "framer-motion";
 
 const fadeInUp = {
@@ -16,8 +18,9 @@ const fadeInUp = {
 
 const Guide = () => {
   return (
-    <div className="mt-[50px] flex w-full justify-center">
-      <div className="flex w-[1400px] flex-col items-center text-center justify-center">
+    <div className="mt-20 px-4 flex w-full justify-center bg-[#f8fbff] py-16">
+      <div className="flex w-full max-w-[1200px] flex-col items-center text-center justify-center">
+
         {/* Heading */}
         <motion.div
           initial="hidden"
@@ -25,7 +28,9 @@ const Guide = () => {
           viewport={{ once: false, amount: 0.2 }}
           variants={fadeInUp}
         >
-          <p className="text-[60px] font-[600]">How It Works</p>
+          <h2 className="text-[48px] md:text-[60px] font-extrabold text-gray-800 leading-tight mb-8">
+            How It Works
+          </h2>
         </motion.div>
 
         {/* Step 01 */}
@@ -34,22 +39,16 @@ const Guide = () => {
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
           variants={fadeInUp}
-          className="mt-[45px] flex flex-col gap-2"
+          className="bg-white rounded-2xl p-8 shadow-lg w-full max-w-[600px] mt-10"
         >
-          <p className="text-[45px] font-[500]">Step 01</p>
-          <p className="text-[30px]">Input Your Project Details</p>
-          <p className="w-[400px] text-[14px]">
-            Enter key attributes like team size, experience, budget, and
-            methodology. Our tool makes it simple.
+          <p className="text-[20px] text-blue-600 font-bold mb-2">Step 01</p>
+          <h3 className="text-[28px] font-semibold text-gray-800">Input Your Project Details</h3>
+          <p className="text-[15px] text-gray-600 mt-2">
+            Enter key attributes like team size, experience, budget, and methodology. Our tool makes it simple.
           </p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className="text-[#1E73E8] mt-[20px] ml-[170px]"
-          >
-            <PiArrowFatLinesDownFill size={60} />
-          </motion.div>
+          <div className="mt-6 animate-bounce items-center justify-center w-full flex text-blue-500">
+            <PiArrowFatLinesDownFill size={40} />
+          </div>
         </motion.div>
 
         {/* Step 02 */}
@@ -58,22 +57,16 @@ const Guide = () => {
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
           variants={fadeInUp}
-          className="mt-[45px] flex flex-col gap-2"
+          className="bg-white rounded-2xl p-8 shadow-lg w-full max-w-[600px] mt-10"
         >
-          <p className="text-[45px] font-[500]">Step 02</p>
-          <p className="text-[30px]">Predict Using Smart Algorithms</p>
-          <p className="w-[400px] text-[14px]">
-            Our forecasting engine analyses your inputs using patterns from
-            real-world project outcomes.
+          <p className="text-[20px] text-blue-600 font-bold mb-2">Step 02</p>
+          <h3 className="text-[28px] font-semibold text-gray-800">Predict Using Smart Algorithms</h3>
+          <p className="text-[15px] text-gray-600 mt-2">
+            Our forecasting engine analyses your inputs using patterns from real-world project outcomes.
           </p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 0.5 }}
-            className="text-[#1E73E8] mt-[20px] ml-[170px]"
-          >
-            <PiArrowFatLinesDownFill size={60} />
-          </motion.div>
+          <div className="mt-6 animate-bounce items-center justify-center w-full flex text-blue-500">
+            <PiArrowFatLinesDownFill size={40} />
+          </div>
         </motion.div>
 
         {/* Step 03 */}
@@ -82,14 +75,17 @@ const Guide = () => {
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
           variants={fadeInUp}
-          className="mt-[45px] flex flex-col gap-2"
+          className="bg-white rounded-2xl p-8 shadow-lg w-full max-w-[600px] mt-10"
         >
-          <p className="text-[45px] font-[500]">Step 03</p>
-          <p className="text-[30px]">Get Actionable Insights</p>
-          <p className="w-[400px] text-[14px]">
-            View your success score and receive personalized tips to improve
-            project outcomes.
+          <p className="text-[20px] text-blue-600 font-bold mb-2">Step 03</p>
+          <h3 className="text-[28px] font-semibold text-gray-800">Get Actionable Insights</h3>
+          <p className="text-[15px] text-gray-600 mt-2">
+            View your success score and receive personalized tips to improve project outcomes.
           </p>
+
+          <div className="mt-6 animate-bounce items-center justify-center w-full flex text-blue-500">
+            <MdOutlineDoneOutline size={40} />
+          </div>
         </motion.div>
       </div>
     </div>
