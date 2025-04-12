@@ -4,9 +4,9 @@ This repository contains the web interface and backend services for SoftSight, e
 
 ## 🌟 Key Features:
 
-Frontend built with React (or your preferred framework)
+Frontend built with NextJs
 
-Backend APIs developed with Python (Flask/FastAPI)
+Backend APIs developed with Python (Flask)
 
 Secure communication with the ML model
 
