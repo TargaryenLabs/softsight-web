@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   return (
-    <div className="w-full items-center justify-center flex">
+    <div className="w-full items-center justify-center fixed z-50 flex">
       <div className="mt-[20px] bg-blue-50 flex w-[1400px] h-[80px] items-center rounded-3xl justify-between pl-[50px] pr-[80px] shadow-2xl">
         <div className="flex text-[32px] gap-3 font-[640] items-center">
           {/* Logo Start */}
