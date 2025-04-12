@@ -1,25 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { FaChartBar } from "react-icons/fa";
+import { FaRegLightbulb } from "react-icons/fa";
+import { BsStopwatch } from "react-icons/bs";
+import { TbAugmentedReality2 } from "react-icons/tb";
 
 const features = [
     {
-      icon: '📊',
+      icon: <FaChartBar/>,
       title: 'AI-Powered Forecasting',
       description: 'Our algorithm learns from successful (and failed) projects.',
     },
     {
-      icon: '⚙️',
+      icon: <TbAugmentedReality2 />,
       title: 'Real-World Parameters',
       description: 'Based on practical factors like budget, risk, and client involvement.',
     },
     {
-      icon: '⏱️',
+      icon: <BsStopwatch/>,
       title: 'Fast Results',
       description: "Predict your project's chances in under 10 seconds.",
     },
     {
-      icon: '💡',
+      icon: <FaRegLightbulb/>,
       title: 'Actionable Tips',
       description: 'Get suggestions tailored to your scenario.',
     },
@@ -54,7 +58,7 @@ const Features = () => {
               variants={cardVariants}
               custom={index}
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
+              <div className="text-4xl text-[] pl-30 animate-pulse text-blue-500 mb-4">{feature.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
               <p className="text-sm text-gray-600">{feature.description}</p>
             </motion.div>
