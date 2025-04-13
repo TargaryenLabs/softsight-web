@@ -20,7 +20,7 @@ const Footer = () => {
         {/* Right: Call to Action */}
         <div className="text-center md:text-right">
           <p className="text-sm mb-5 text-gray-400 ">Ready to forecast your project?</p>
-          <a href="" className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-5 py-2 rounded-lg transition">
+          <a href="/forecast" className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-5 py-2 rounded-lg transition">
             Get Started
           </a>
         </div>
