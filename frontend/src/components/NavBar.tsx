@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex justify-center backdrop-blur-md">
+    <div className="fixed top-0 left-0 w-full z-40 flex justify-center backdrop-blur-md">
       <div className="mt-6 bg-white/70 border border-blue-100 shadow-xl flex w-[90%] max-w-[1400px] h-[80px] items-center rounded-full justify-between px-6 md:px-10 transition-all duration-300">
 
         {/* Logo Section */}
