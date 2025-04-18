@@ -44,8 +44,9 @@ def predict():
         
         # Make prediction
         prediction = model.predict(input_vector)[0]
+        prediction = int(prediction*100)
 
-        return jsonify({'prediction': round(float(prediction), 4)})
+        return jsonify({'prediction': prediction})
     
     except Exception as e:
         return jsonify({'error': str(e)})
