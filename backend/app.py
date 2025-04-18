@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load the trained model
-model = joblib.load("project_success_model.pkl")
+model = joblib.load("model.pkl")
 
 # Expected features in correct order (from one-hot encoded training set)
 FEATURE_ORDER = [
