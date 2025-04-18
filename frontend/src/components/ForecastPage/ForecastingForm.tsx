@@ -32,16 +32,57 @@ const ForecastingForm = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+
+  const oneHotEncodeForm = () => {
+    const encoded: Record<string, number> = {
+      avg_dev_experience: parseFloat(form.avg_dev_experience),
+      pm_experience: parseFloat(form.pm_experience),
+      budget_estimation: parseFloat(form.budget_estimation),
+      legacy_system_involved: form.legacy_system_involved.toLowerCase() === "true" ? 1 : 0,
+    };
+  
+    const oneHotMap: Record<string, string[]> = {
+      project_complexity: ["Low", "Medium", "High"],
+      scope_clarity: ["Vague", "Medium", "Clear"],
+      urgency_level: ["Low", "Medium", "High"],
+      org_structure_type: ["Functional", "Matrix", "Projectized"],
+      client_priority: ["Cost", "Quality", "Time"],
+      team_sdlc_knowledge: ["Low", "Medium", "High"],
+      user_involvement: ["Low", "Medium", "High"],
+      tool_familiarity: ["Low", "Medium", "High"],
+      tech_stack_familiarity: ["Low", "Medium", "High"],
+      testing_strategy: ["Automated", "Manual", "Mixed"],
+      on_schedule: ["NO", "YES"],
+      communication_quality: ["Poor", "Average", "Good"],
+      risk_management_score: ["Low", "Medium", "High"],
+      control_mechanism: ["Weak", "Moderate", "Strong"],
+    };
+  
+    for (const [field, values] of Object.entries(oneHotMap)) {
+      values.forEach((val) => {
+        const key = `${field}_${val}`;
+        const currentValue = form[field as keyof typeof form];
+        encoded[key] = currentValue?.toLowerCase() === val.toLowerCase() ? 1 : 0;
+      });
+    }
+  
+    return encoded;
+  };
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    const encodedData = oneHotEncodeForm();
+  
     const res = await fetch("http://127.0.0.1:5000/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(encodedData),
     });
+  
     const data = await res.json();
     router.push(`/results?prediction=${data.prediction}`);
   };
+  
 
   const renderSelect = (
     name: string,
