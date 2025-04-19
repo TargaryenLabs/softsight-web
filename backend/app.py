@@ -1,48 +1,72 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-import joblib
-import numpy as np
 import pandas as pd
+import numpy as np
+import joblib
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-# Load the trained model
-model = joblib.load("model.pkl")
+# Load trained model and OneHotEncoder
+model = joblib.load('model.pkl')
+encoder = joblib.load('onehot_encoder.pkl')
 
-# Expected features in correct order (from one-hot encoded training set)
-FEATURE_ORDER = [
-'avg_dev_experience', 'pm_experience', 'budget_estimation', 'legacy_system_involved', 'project_complexity_High', 'project_complexity_Low', 'project_complexity_Medium', 'scope_clarity_Clear', 'scope_clarity_Medium', 'scope_clarity_Vague', 'urgency_level_High', 'urgency_level_Low', 'urgency_level_Medium', 'org_structure_type_Functional', 'org_structure_type_Matrix', 'org_structure_type_Projectized', 'client_priority_Cost', 'client_priority_Quality', 'client_priority_Time', 'team_sdlc_knowledge_High', 'team_sdlc_knowledge_Low', 'team_sdlc_knowledge_Medium', 'user_involvement_High', 'user_involvement_Low', 'user_involvement_Medium', 'tool_familiarity_High', 'tool_familiarity_Low', 'tool_familiarity_Medium', 'tech_stack_familiarity_High', 'tech_stack_familiarity_Low', 'tech_stack_familiarity_Medium', 'testing_strategy_Automated', 'testing_strategy_Manual', 'testing_strategy_Mixed', 'on_schedule_NO', 'on_schedule_YES', 'communication_quality_Average', 'communication_quality_Good', 'communication_quality_Poor', 'risk_management_score_High', 'risk_management_score_Low', 'risk_management_score_Medium', 'control_mechanism_Moderate', 'control_mechanism_Strong', 'control_mechanism_Weak'
-]
+# Define categorical and numeric features separately
+categorical_cols = ['project_complexity', 'scope_clarity', 'urgency_level', 
+                    'org_structure_type', 'client_priority', 'team_sdlc_knowledge',
+                    'user_involvement', 'tool_familiarity', 'tech_stack_familiarity',
+                    'testing_strategy', 'on_schedule', 'communication_quality', 
+                    'risk_management_score', 'control_mechanism','legacy_system_involved']
+
+numeric_cols = ['avg_dev_experience', 'pm_experience', 'budget_estimation']
 
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
         data = request.get_json()
-        
-        # Create empty input vector
-        input_vector = pd.DataFrame([np.zeros(len(FEATURE_ORDER))], columns=FEATURE_ORDER)
 
-        # Fill vector
-        for key, value in data.items():
-            if key in ['avg_dev_experience', 'pm_experience', 'budget_estimation']:
-                input_vector[key] = float(value)
-            elif key in input_vector.columns:
-                input_vector[key] = 1.0
+        # Convert JSON to DataFrame
+        input_df = pd.DataFrame([data])
 
-        # Debug: print input vector
-        print("Received input vector:")
-        print(input_vector.to_dict(orient="records"))
+        # Fix case for categorical columns to match training format
+        for col in categorical_cols:
+            input_df[col] = input_df[col].astype(str).str.capitalize()
 
-        # Make prediction
-        prediction = int((model.predict(input_vector)[0])*100)
-        print(f"Prediction = {prediction}")
+        # Standardize on_schedule to match encoder (expects all caps)
+        if 'on_schedule' in input_df.columns:
+            input_df['on_schedule'] = input_df['on_schedule'].str.upper()
 
-        return jsonify({'prediction': (prediction)})
+        # Convert legacy_system_involved to boolean
+        if 'legacy_system_involved' in input_df.columns:
+            input_df['legacy_system_involved'] = input_df['legacy_system_involved'].str.lower().map({'true': True, 'false': False})
+
+
+
+        # Ensure numeric columns are converted properly
+        input_df[numeric_cols] = input_df[numeric_cols].apply(pd.to_numeric)
+
+        # One-hot encode
+        encoded_cats = encoder.transform(input_df[categorical_cols])
+        encoded_cat_df = pd.DataFrame(encoded_cats, columns=encoder.get_feature_names_out(categorical_cols))
+
+        # Merge numeric and encoded data
+        final_input = pd.concat([input_df[numeric_cols].reset_index(drop=True), encoded_cat_df], axis=1)
+
+        print("✅ Processed input vector:", final_input.to_dict(orient="records"))
+
+        # Predict
+        prediction = model.predict(final_input)[0]
+        prediction_proba = model.predict_proba(final_input)[0][1]
+
+        return jsonify({
+            'prediction': 'YES' if prediction == 1 else 'NO',
+            'probability': int(float(prediction_proba)*100)
+        })
 
     except Exception as e:
-        print("Error during prediction:", str(e))
-        return jsonify({'error': str(e)})
+        print("❌ Error during prediction:", str(e))
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)

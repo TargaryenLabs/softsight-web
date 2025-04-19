@@ -32,124 +32,24 @@ const ForecastingForm = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const FEATURE_ORDER: string[] = [
-    "avg_dev_experience",
-    "pm_experience",
-    "budget_estimation",
-    "legacy_system_involved",
-    "project_complexity_High",
-    "project_complexity_Low",
-    "project_complexity_Medium",
-    "scope_clarity_Clear",
-    "scope_clarity_Medium",
-    "scope_clarity_Vague",
-    "urgency_level_High",
-    "urgency_level_Low",
-    "urgency_level_Medium",
-    "org_structure_type_Functional",
-    "org_structure_type_Matrix",
-    "org_structure_type_Projectized",
-    "client_priority_Cost",
-    "client_priority_Quality",
-    "client_priority_Time",
-    "team_sdlc_knowledge_High",
-    "team_sdlc_knowledge_Low",
-    "team_sdlc_knowledge_Medium",
-    "user_involvement_High",
-    "user_involvement_Low",
-    "user_involvement_Medium",
-    "tool_familiarity_High",
-    "tool_familiarity_Low",
-    "tool_familiarity_Medium",
-    "tech_stack_familiarity_High",
-    "tech_stack_familiarity_Low",
-    "tech_stack_familiarity_Medium",
-    "testing_strategy_Automated",
-    "testing_strategy_Manual",
-    "testing_strategy_Mixed",
-    "on_schedule_NO",
-    "on_schedule_YES",
-    "communication_quality_Average",
-    "communication_quality_Good",
-    "communication_quality_Poor",
-    "risk_management_score_High",
-    "risk_management_score_Low",
-    "risk_management_score_Medium",
-    "control_mechanism_Moderate",
-    "control_mechanism_Strong",
-    "control_mechanism_Weak",
-  ];
-
-  const oneHotEncodeForm = () => {
-    const base: Record<string, number> = {};
-
-    // Fill all expected features with default 0
-    FEATURE_ORDER.forEach((key) => {
-      base[key] = 0;
-    });
-
-    // Set numerical values
-    base["avg_dev_experience"] = parseFloat(form.avg_dev_experience);
-    base["pm_experience"] = parseFloat(form.pm_experience);
-    base["budget_estimation"] = parseFloat(form.budget_estimation);
-    base["legacy_system_involved"] =
-      form.legacy_system_involved === "true" ? 1 : 0;
-
-    // Categorical fields to one-hot encode
-    const categorical: Record<string, string> = {
-      project_complexity: form.project_complexity,
-      scope_clarity: form.scope_clarity,
-      urgency_level: form.urgency_level,
-      org_structure_type: form.org_structure_type,
-      client_priority: form.client_priority,
-      team_sdlc_knowledge: form.team_sdlc_knowledge,
-      user_involvement: form.user_involvement,
-      tool_familiarity: form.tool_familiarity,
-      tech_stack_familiarity: form.tech_stack_familiarity,
-      testing_strategy: form.testing_strategy,
-      on_schedule: form.on_schedule,
-      communication_quality: form.communication_quality,
-      risk_management_score: form.risk_management_score,
-      control_mechanism: form.control_mechanism,
-    };
-
-    // Activate one-hot for selected values
-    for (const [field, value] of Object.entries(categorical)) {
-      const key = `${field}_${capitalize(value)}`;
-      if (FEATURE_ORDER.includes(key)) {
-        base[key] = 1;
-      }
-    }
-
-    return base;
-  };
-
-  const capitalize = (value: string) => {
-    if (!value) return "";
-    return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-  };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const encodedData = oneHotEncodeForm();
-
-    console.log("🚀 Encoded Form Data:", encodedData); // Debug log
 
     const res = await fetch("http://127.0.0.1:5000/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(encodedData),
+      body: JSON.stringify(form),
     });
 
     const data = await res.json();
-    console.log("🔍 API Response:", data); // Debug log
+    console.log("🔍 API Response:", data);
 
     if (!data || data.prediction === undefined) {
-      alert("❌ Prediction failed. Please check your API/server logs.");
+      alert("❌ Prediction failed. Check your API/server logs.");
       return;
     }
 
-    router.push(`/results?prediction=${data.prediction}`);
+    router.push(`/results?prediction=${data.probability}`);
   };
 
   const renderSelect = (
