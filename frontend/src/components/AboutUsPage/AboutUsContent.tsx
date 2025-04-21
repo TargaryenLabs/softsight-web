@@ -4,8 +4,8 @@ const AboutUsContent = () => {
     <div className="w-full  bg-white px-6 flex justify-center mt-[150px]">
       <div className="max-w-[900px] w-full text-center space-y-12">
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 justify-center flex gap-10">
-          <p>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 justify-center flex items-center sm:gap-10">
+          <p className="hidden sm:block">
             <SiBookstack />
           </p>
           <p>About SoftSight</p>
