@@ -64,7 +64,9 @@ const ForecastingForm = () => {
       transition={{ duration: 0.4 }}
     >
       <label className="block font-semibold text-gray-700 mb-1 ">{label}</label>
-      <p className="text-sm text-gray-500 mb-[15px]  sm:h-[50px]">{description}</p>
+      <p className="text-sm text-gray-500 mb-[15px]  sm:h-[50px]">
+        {description}
+      </p>
       <select
         name={name}
         value={form[name as keyof typeof form]}
@@ -98,8 +100,8 @@ const ForecastingForm = () => {
       >
         {/* Project-Specific Attributes Section */}
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 mb-16">
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
               {renderSelect(
                 "project_complexity",
                 "Project Complexity",
@@ -121,7 +123,7 @@ const ForecastingForm = () => {
               {renderSelect(
                 "on_schedule",
                 "On Schedule",
-                "Is the project progressing according to the planned schedule? Useful to identify early delays.",
+                "A preliminary estimation of whether the project is likely to be completed within the planned timeline.",
                 ["Yes", "No"]
               )}
               <div>
