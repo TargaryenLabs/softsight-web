@@ -63,8 +63,8 @@ const ForecastingForm = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <label className="block font-semibold text-gray-700 mb-1">{label}</label>
-      <p className="text-sm text-gray-500 mb-1 h-[65px]">{description}</p>
+      <label className="block font-semibold text-gray-700 mb-1 ">{label}</label>
+      <p className="text-sm text-gray-500 mb-[15px]  sm:h-[50px]">{description}</p>
       <select
         name={name}
         value={form[name as keyof typeof form]}
@@ -98,8 +98,8 @@ const ForecastingForm = () => {
       >
         {/* Project-Specific Attributes Section */}
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 mb-16">
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-10 items-start">
-            <div className="xl:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+        <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
               {renderSelect(
                 "project_complexity",
                 "Project Complexity",
@@ -128,7 +128,7 @@ const ForecastingForm = () => {
                 <label className="block font-semibold text-gray-700 mb-1">
                   Budget Estimation (USD)
                 </label>
-                <p className="text-sm h-[65px] text-gray-500 mb-1">
+                <p className="text-sm  text-gray-500 mb-[10px]">
                   Estimated cost of the full project. Affects resource
                   allocation and planning strategies.
                 </p>
@@ -197,7 +197,7 @@ const ForecastingForm = () => {
                 <label className="block font-semibold text-gray-700 mb-1">
                   Average Developer Experience (0–10)
                 </label>
-                <p className="text-sm h-[65px] text-gray-500 mb-1">
+                <p className="text-sm  text-gray-500 mb-[10px]">
                   Average number of years your developers have been coding
                   professionally. More experience usually means better quality.
                 </p>
@@ -208,7 +208,7 @@ const ForecastingForm = () => {
                   max="10"
                   value={form.avg_dev_experience}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border mt-[15px]  border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
@@ -216,7 +216,7 @@ const ForecastingForm = () => {
                 <label className="block font-semibold text-gray-700 mb-1">
                   Project Manager Experience (0–10)
                 </label>
-                <p className="text-sm h-[65px] text-gray-500 mb-1">
+                <p className="text-sm  text-gray-500 mb-[10px]">
                   Experience of the project manager in years. More experience
                   means better planning, mitigation, and delivery handling.
                 </p>
@@ -227,7 +227,7 @@ const ForecastingForm = () => {
                   max="10"
                   value={form.pm_experience}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border mt-[15px]  border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>

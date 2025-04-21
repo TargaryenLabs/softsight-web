@@ -1,24 +1,27 @@
 const HeroSection = () => {
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="bg-[url('/images/bg.png')] bg-cover bg-center h-[650px] opacity-95 w-[1350px] mt-[150px] rounded-3xl justify-center items-center flex flex-col">
+    <div className="w-full flex items-center justify-center px-4">
+      <div className="bg-[url('/images/bg.png')] bg-cover bg-center h-[650px] sm:h-[700px] md:h-[750px] lg:h-[650px] w-full max-w-[1350px] mt-[150px] rounded-3xl justify-center items-center flex flex-col text-center px-4 sm:px-6 md:px-12">
+        
         {/* Heading */}
-        <p className="text-[60px] w-[1000px] font-[700] text-white text-center">
+        <p className="text-white font-bold text-[32px] sm:text-[40px] md:text-[50px] lg:text-[60px] leading-tight max-w-[900px]">
           Forecast Your Software Project's Success Before You Write a Single
           Line of Code!
         </p>
+
         {/* Sub Heading */}
-        <p className="text-white w-[1000px] text-[24px] pt-[65px] text-center">
+        <p className="text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] pt-10 max-w-[800px]">
           With SoftSight, get accurate, data-driven predictions on your software
           project's chance of success based on your team, budget, methodology,
           and more.
         </p>
-        {/* Navigation */}
+
+        {/* CTA Button */}
         <a
           href="/forecast"
-          className="w-[338px] h-[71px] flex justify-center items-center border-2 hover:bg-white bg-blue-50/10 text-white border-white rounded-3xl mt-[80px] group transition-all  duration-500"
+          className="mt-12 w-[280px] sm:w-[300px] md:w-[320px] h-[60px] sm:h-[65px] md:h-[71px] flex justify-center items-center border-2 hover:bg-white bg-blue-50/10 text-white border-white rounded-3xl group transition-all duration-500"
         >
-          <p className="text-[20px] font-[600] group-hover:text-[#1E73E8] text-white">
+          <p className="text-[18px] sm:text-[20px] font-semibold group-hover:text-[#1E73E8]">
             Forecast My Project
           </p>
         </a>
