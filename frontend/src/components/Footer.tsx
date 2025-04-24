@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 const Footer = () => {
   return (
@@ -7,20 +7,36 @@ const Footer = () => {
         {/* Left: Branding */}
         <div className="text-center md:text-left">
           <h2 className="text-2xl font-bold text-blue-400">SoftSight</h2>
-          <p className="text-sm text-gray-400 mt-1">© {new Date().getFullYear()} All rights reserved.</p>
+          <p className="text-sm text-gray-400 mt-1">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
         </div>
 
         {/* Center: Links */}
         <div className="flex gap-6 text-sm">
-          <a href="/" className="hover:text-blue-400 transition">Home</a>
-          <a href="/forecast" className="hover:text-blue-400 transition">Forecast</a>
-          <a href="/about-us" className="hover:text-blue-400 transition">About Us</a>
+          <a href="/" className="hover:text-blue-400 transition">
+            Home
+          </a>
+          <a href="/guide" className="hover:text-blue-400 transition">
+            Guide
+          </a>
+          <a href="/forecast" className="hover:text-blue-400 transition">
+            Forecast
+          </a>
+          <a href="/about-us" className="hover:text-blue-400 transition">
+            About Us
+          </a>
         </div>
 
         {/* Right: Call to Action */}
         <div className="text-center md:text-right">
-          <p className="text-sm mb-5 text-gray-400 ">Ready to forecast your project?</p>
-          <a href="/forecast" className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-5 py-2 rounded-lg transition">
+          <p className="text-sm mb-5 text-gray-400 ">
+            Ready to forecast your project?
+          </p>
+          <a
+            href="/forecast"
+            className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-5 py-2 rounded-lg transition"
+          >
             Get Started
           </a>
         </div>

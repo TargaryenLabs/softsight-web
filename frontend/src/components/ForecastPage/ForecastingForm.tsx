@@ -93,7 +93,7 @@ const ForecastingForm = () => {
     >
       <motion.form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-3xl px-12 py-14 w-full max-w-7xl border border-slate-200"
+        className="bg-white shadow-lg rounded-3xl px-6 py-14 w-full max-w-7xl border border-slate-200"
         initial={{ scale: 0.98 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}

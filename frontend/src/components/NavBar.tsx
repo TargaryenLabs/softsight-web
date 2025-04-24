@@ -24,12 +24,16 @@ const Navbar = () => {
           <a href="/" className="hover:text-blue-600 transition duration-300">
             Home
           </a>
+          <a href="/guide" className="hover:text-blue-600 transition duration-300">
+            Guide
+          </a>
           <a href="/forecast" className="hover:text-blue-600 transition duration-300">
             Forecast
           </a>
           <a href="/about-us" className="hover:text-blue-600 transition duration-300">
             About Us
           </a>
+          
         </div>
 
         {/* Mobile Menu Button */}
