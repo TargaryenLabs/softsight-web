@@ -7,7 +7,7 @@ const criteria = [
     category: "Project-Specific Inputs",
     items: [
       {
-        label: "project_complexity",
+        label: "Project Complexity",
         description: "Complexity of features and integrations",
         example:
           "Example: Low: Simple CRUD, few users, known tech, Medium: Multiple modules, external API, High: High concurrency, AI/ML, microservices",
@@ -15,14 +15,14 @@ const criteria = [
       },
 
       {
-        label: "scope_clarity",
+        label: "Scope Clarity",
         description: "Clarity and completeness of the requirements",
         example:
           "Example: Clear: Detailed requirements documented, Medium: Partial clarity, Vague: No detailed specs or frequent changes",
         howToGet: "Ask PM/stakeholders during planning",
       },
       {
-        label: "urgency_level",
+        label: "Urgency Level",
         description: "Time pressure or critical deadlines",
         example:
           "Example: Low: Flexible timeline, Medium: Moderate pressure, High: Time-critical, regulatory deadline",
@@ -30,13 +30,13 @@ const criteria = [
       },
 
       {
-        label: "on_schedule",
+        label: "On Schedule",
         description: "Delivered within planned timeline",
         example: "Example: First release completed 2 days early.",
         howToGet: "Compare timeline with actual delivery",
       },
       {
-        label: "budget_estimation",
+        label: "Budget Estimation",
         description: "Total allocated project budget (USD)",
         example: "Example: The project has a budget of $75,000.",
         howToGet: "From project documentation or finance team",
@@ -47,25 +47,25 @@ const criteria = [
     category: "Organizational Structure",
     items: [
       {
-        label: "org_structure_type",
+        label: "Org Structure Type",
         description: "Functional, Matrix, or Projectized",
         example: "Example: Matrix structure with dual reporting.",
         howToGet: "Ask HR or management",
       },
       {
-        label: "client_priority",
+        label: "Client Priority",
         description: "Whether time, cost, or quality is top priority",
         example: 'Example: Client prioritizes "Time to Market".',
         howToGet: "Ask the client or PM",
       },
       {
-        label: "control_mechanism",
+        label: "Control Mechanism",
         description: "Monitoring tools and decision mechanisms used",
         example: "Example: Progress tracked via Jira sprint board.",
         howToGet: "Ask team or check tools used for governance",
       },
       {
-        label: "risk_management_score",
+        label: "Risk Management Score",
         description: "Preparedness for and response to risks",
         example:
           "Example: - Low: No planning, Medium: Identified but not tracked, High: Tracked & mitigated",
@@ -77,7 +77,7 @@ const criteria = [
     category: "Team Experience & Collaboration",
     items: [
       {
-        label: "avg_dev_experience",
+        label: "Avg Dev Experience",
         description: "Average years of experience among developers",
         example:
           "Example: A team with members having 3, 5, and 7 years experience averages 5 years.",
@@ -85,7 +85,7 @@ const criteria = [
           "Ask HR/project manager for average years of experience of developers on the project",
       },
       {
-        label: "pm_experience",
+        label: "PM Experience",
         description: "Project manager’s experience in years",
         example:
           "Example: The PM has 8 years of project management experience.",
@@ -93,14 +93,14 @@ const criteria = [
       },
 
       {
-        label: "team_sdlc_knowledge",
+        label: "Team Sdlc Knowledge",
         description: "Familiarity with software development lifecycle",
         example:
           "Example: Low: No formal training, Medium: Aware of SDLC steps, High: Experienced with multiple SDLCs",
         howToGet: "Interview or check training records",
       },
       {
-        label: "user_involvement",
+        label: "User Involvement",
         description: "End-user participation in project phases",
         example:
           "Example: Low: No user input, Medium: Periodic reviews, High: Users in every phase",
@@ -108,7 +108,7 @@ const criteria = [
       },
 
       {
-        label: "communication_quality",
+        label: "Communication Quality",
         description: "How effective team communication was",
         example: "Example: Daily standups and retrospectives held.",
         howToGet: "Survey team or check communication logs",
@@ -119,25 +119,25 @@ const criteria = [
     category: "Technology & Tools",
     items: [
       {
-        label: "tool_familiarity",
+        label: "Tool Familiarity",
         description: "Familiarity with tools like Git, Jira, CI/CD",
         example: "Example: Team uses GitHub, Jenkins, and Jira daily.",
         howToGet: "Ask team members directly",
       },
       {
-        label: "legacy_system_involved",
+        label: "Legacy System Involved",
         description: "Whether integration with old systems was required",
         example: "Example: Integrated with Oracle 2008 system.",
         howToGet: "Ask technical lead or review system dependencies",
       },
       {
-        label: "tech_stack_familiarity",
+        label: "Tech Stack Familiarity",
         description: "Whether team is comfortable with the tech stack",
         example: "Example: Prior experience with React and Node.js.",
         howToGet: "Ask developers if stack is familiar or new",
       },
       {
-        label: "testing_strategy",
+        label: "Testing Strategy",
         description: "Manual or automated testing approaches",
         example: "Example: Automated tests with Jest and Cypress.",
         howToGet: "Ask QA team or review test plans",
