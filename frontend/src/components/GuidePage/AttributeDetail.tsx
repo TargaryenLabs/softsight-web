@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { createRoot } from "react-dom/client";
 import {
   attributeCategories,
   overviewText,
@@ -38,16 +37,12 @@ export const AttributeDetail = ({ selected }: Props) => {
   return found ? <AttributeBox attribute={found} /> : null;
 };
 
-const AttributeBox = ({
-  attribute,
-}: {
-  attribute: {
-    label: string;
-    description: string;
-    example: string;
-    howToGet?: string;
-  };
-}) => (
+type Attribute = {
+  label: string;
+  description: string;
+};
+
+const AttributeBox = ({ attribute }: { attribute: Attribute }) => (
   <div>
     <h2 className="text-2xl font-bold mb-2 text-indigo-700">
       {attribute.label}
@@ -61,17 +56,7 @@ const AttributeBox = ({
         >
           {attribute.description}
         </Markdown>
-        </div>
-    </div>
-
-    <div className="text-sm text-gray-600 italic mb-2">
-      <span className="font-semibold">Example:</span> {attribute.example}
-    </div>
-
-    {attribute.howToGet && (
-      <div className="text-sm text-gray-500">
-        <span className="font-semibold">How to get:</span> {attribute.howToGet}
       </div>
-    )}
+    </div>
   </div>
 );
