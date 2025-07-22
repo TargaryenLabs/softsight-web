@@ -9,18 +9,18 @@ const GuidePage = () => {
   const [selected, setSelected] = useState("overview");
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="flex justify-center bg-gray-100 min-h-screen pt-[150px] px-4">
+      <main className="flex flex-1 justify-center bg-gray-50 pt-[120px] px-4 pb-12">
         <div className="flex w-full max-w-7xl gap-6">
-          <div className="bg-white rounded-lg shadow-md w-64 overflow-hidden">
+          <div className="w-72 bg-white rounded-2xl shadow-sm border border-slate-200">
             <AttributeSidebar selected={selected} onSelect={setSelected} />
           </div>
-          <div className="flex-1 bg-white rounded-lg shadow-md p-6">
+          <div className="flex-1 bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
             <AttributeDetail selected={selected} />
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );

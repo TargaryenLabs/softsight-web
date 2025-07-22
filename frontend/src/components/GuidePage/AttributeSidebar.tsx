@@ -9,32 +9,37 @@ type Props = {
 
 export const AttributeSidebar = ({ selected, onSelect }: Props) => {
   return (
-    <aside className="p-4 overflow-y-auto h-full">
-      <h2 className="text-xl font-bold mb-4">Guide</h2>
-      <nav className="space-y-6 text-sm">
+    <aside className="p-4 overflow-y-auto h-full text-sm">
+      <h2 className="text-lg font-semibold mb-4 text-indigo-700">Guide</h2>
+      <nav className="space-y-6">
+        {/* Overview */}
         <div>
           <button
-            className={`block text-left w-full ${
-              selected === "overview" ? "text-indigo-600 font-semibold" : ""
+            className={`block w-full text-left px-2 py-1 rounded-md ${
+              selected === "overview"
+                ? "text-white bg-indigo-600 font-semibold"
+                : "hover:bg-indigo-50 text-gray-700"
             }`}
             onClick={() => onSelect("overview")}
           >
             Overview
           </button>
         </div>
+
+        {/* Attributes Grouped */}
         {attributeCategories.map((cat) => (
           <div key={cat.title}>
-            <h4 className="text-xs font-semibold text-gray-500 mt-4 uppercase tracking-wide">
+            <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2 mt-2 mb-1">
               {cat.title}
             </h4>
-            <ul className="ml-2 space-y-1 mt-1">
+            <ul className="space-y-1">
               {cat.items.map((attr) => (
                 <li key={attr.key}>
                   <button
-                    className={`text-left w-full ${
+                    className={`block w-full text-left px-2 py-1 rounded-md ${
                       selected === attr.key
-                        ? "text-indigo-600 font-semibold"
-                        : "text-gray-700"
+                        ? "text-white bg-indigo-600 font-semibold"
+                        : "hover:bg-indigo-50 text-gray-700"
                     }`}
                     onClick={() => onSelect(attr.key)}
                   >
@@ -45,15 +50,17 @@ export const AttributeSidebar = ({ selected, onSelect }: Props) => {
             </ul>
           </div>
         ))}
-        <div className="mt-4">
-          <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+
+        {/* Final Output */}
+        <div>
+          <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2 mt-4 mb-1">
             Final Output
           </h4>
           <button
-            className={`text-left w-full ${
+            className={`block w-full text-left px-2 py-1 rounded-md ${
               selected === "success_status"
-                ? "text-indigo-600 font-semibold"
-                : "text-gray-700"
+                ? "text-white bg-indigo-600 font-semibold"
+                : "hover:bg-indigo-50 text-gray-700"
             }`}
             onClick={() => onSelect("success_status")}
           >
