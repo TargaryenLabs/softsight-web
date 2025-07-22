@@ -24,15 +24,32 @@ export const attributeCategories: AttributeCategory[] = [
       {
         key: "project_complexity",
         label: "Project Complexity",
-        description: "Complexity of features and integrations",
-        example: "Low: Simple CRUD, few users, known tech. High: AI/ML, microservices.",
+        description: `
+
+> Complexity of features and integrations
+
+### Complexity Scoring
+
+| Level | Description              |
+|-------|--------------------------|
+| Low   | Simple CRUD, few users   |
+| High  | AI/ML, microservices     |
+
+#### Equation:
+$$
+Score = \\frac{\\text{Tasks} \\times \\text{Difficulty}}{\\text{Team Size}}
+$$
+`,
+        example:
+          "Low: Simple CRUD, few users, known tech. High: AI/ML, microservices.",
         howToGet: "Self-assessment or PM judgment",
       },
       {
         key: "scope_clarity",
         label: "Scope Clarity",
         description: "Clarity and completeness of the requirements",
-        example: "Clear: Detailed specs. Vague: No detailed specs or frequent changes",
+        example:
+          "Clear: Detailed specs. Vague: No detailed specs or frequent changes",
         howToGet: "Ask PM/stakeholders",
       },
       {
