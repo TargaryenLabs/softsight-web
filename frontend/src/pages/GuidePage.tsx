@@ -11,11 +11,15 @@ const GuidePage = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex">
-        <AttributeSidebar selected={selected} onSelect={setSelected} />
-        <main className="flex-1 min-h-screen bg-gray-50">
-          <AttributeDetail selected={selected} />
-        </main>
+      <div className="flex justify-center bg-gray-100 min-h-screen pt-[150px] px-4">
+        <div className="flex w-full max-w-7xl gap-6">
+          <div className="bg-white rounded-lg shadow-md w-64 overflow-hidden">
+            <AttributeSidebar selected={selected} onSelect={setSelected} />
+          </div>
+          <div className="flex-1 bg-white rounded-lg shadow-md p-6">
+            <AttributeDetail selected={selected} />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
