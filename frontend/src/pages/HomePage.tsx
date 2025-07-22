@@ -20,11 +20,11 @@ const HomePage = () => {
       </div>
 
       <div>
-        <Features/>
+        <Features />
       </div>
 
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );
