@@ -502,12 +502,94 @@ This produces a score on a 1–5 scale.
       {
         key: "user_involvement",
         label: "User Involvement",
-        description: "End-user participation",
+        description: `
+        
+Indicates how actively and frequently end-users participate in project decisions and feedback loops. High user involvement often correlates with better alignment between delivered software and actual user needs.
+
+## Calculation Method
+
+Assign points based on how frequently users are involved in key project activities. Score these interactions on a regular basis (e.g., per sprint or milestone).
+
+| Activity                                                   | Description                                                                 | Points |
+|------------------------------------------------------------|-----------------------------------------------------------------------------|--------|
+| Users participate in requirements gathering                | Users are involved in defining what the system should do                    | +2     |
+| Users attend sprint demos                                  | Users attend demonstrations of work completed during a sprint              | +2     |
+| Users are available for ad-hoc questions                   | Users can be consulted during development for clarifications               | +1     |
+| Dedicated users perform User Acceptance Testing (UAT)      | End-users validate that the system meets their expectations                | +3     |
+| Users are embedded in the team (e.g., Product Owner role)  | A user representative works closely with the dev team throughout the project | +2     |
+
+- **User Acceptance Testing (UAT)**: A phase where real users test the software before final release to ensure it meets requirements.
+
+- **Agile**: A group of software development methods based on iterative development, where requirements and solutions evolve through user collaboration.
+
+### Final Mapping
+
+| Total Score | User Involvement Level |
+|-------------|------------------------|
+| 0 – 3         | Low                    |
+| 4 – 7         | Medium                 |
+| > 7          | High                   |
+
+### Reference
+
+> K. Beck *et al.*, "Manifesto for Agile Software Development," 2001.  
+> [Available online](https://agilemanifesto.org)
+
+        
+        `,
       },
       {
         key: "communication_quality",
         label: "Communication Quality",
-        description: "How effective team communication was",
+        description: `
+        
+Assesses the effectiveness and clarity of communication within the team before a project begins. This **Communication Readiness Score** predicts how well the team is likely to collaborate based on key structural and historical factors.
+
+## Calculation Method
+
+Use a scoring model based on four predictive factors. Each factor is rated from 1 (Poor) to 3 (Good). The final score is the average of these ratings.
+
+**Formula:**
+
+$$
+\\text{Readiness Score} = \\frac{S_{\\text{dist}} + S_{\\text{size}} + S_{\\text{collab}} + S_{\\text{plan}}}{4}
+$$
+
+Where:
+- $ S_{\\text{dist}} $: Team Distribution
+- $ S_{\\text{size}} $: Team Size
+- $ S_{\\text{collab}} $: Prior Collaboration
+- $ S_{\\text{plan}} $: Communication Plan
+
+### Scoring Table
+
+| Factor                     | Criteria                                                                                   | Score |
+|---------------------------|--------------------------------------------------------------------------------------------|--------|
+| **Team Distribution**      | Fully co-located in the same office                                                       | 3      |
+|                           | Hybrid/distributed within similar time zones (≤ 3 hours difference)                       | 2      |
+|                           | Distributed across time zones with > 3 hours difference                                    | 1      |
+| **Team Size**             | Small team (3–5 members)                                                                   | 3      |
+|                           | Medium team (6–9 members)                                                                  | 2      |
+|                           | Large team (10+ members)                                                                   | 1      |
+| **Prior Collaboration**   | >75% of team has worked together successfully before                                       | 3      |
+|                           | 25–75% of team has worked together                                                         | 2      |
+|                           | <25% of team has worked together                                                           | 1      |
+| **Communication Plan**    | Formal plan with tools, meeting cadences, and response expectations                        | 3      |
+|                           | Tools defined (e.g., Slack/Teams), but no formal communication process                     | 2      |
+|                           | No formal communication tools or plan                                                      | 1      |
+
+### Final Mapping
+
+| Readiness Score | Communication Level |
+|------------------|---------------------|
+| ≥ 2.75           | Good                |
+| 1.75 – 2.74      | Average             |
+| < 1.75           | Poor                |
+
+This approach enables a **quantitative pre-project assessment** of the expected internal communication quality, which is a critical factor in successful software project execution.
+
+        
+        `,
       },
     ],
   },
@@ -517,22 +599,150 @@ This produces a score on a 1–5 scale.
       {
         key: "tool_familiarity",
         label: "Tool Familiarity",
-        description: "Familiarity with tools like Git, Jira",
+        description: `
+        
+Assesses how well the team understands and utilizes the essential tools required for the project's success. These may include version control systems (e.g., Git), CI/CD platforms, issue trackers, IDEs, and collaboration tools.
+
+## Calculation Method
+
+Conduct a survey where each team member rates their familiarity with the core tools being used in the project. Tools may include:
+
+- **Jira** (project/task management)
+- **Git** (version control)
+- **CI/CD platforms** (e.g., Jenkins, GitHub Actions)
+- **IDEs** (e.g., VS Code, IntelliJ IDEA)
+- **Communication platforms** (e.g., Slack, Teams)
+
+Each member rates their proficiency on a **1–5 scale**, where:
+
+- 1 = Not familiar at all  
+- 5 = Expert-level familiarity
+
+Compute the average of all responses to derive the final tool score.
+
+**Formula:**
+
+$$
+\\text{Tool Familiarity Score} = \\frac{\\sum \\text{All individual ratings for toolset}}{\\text{Number of team members}}
+$$
+
+### Final Mapping
+
+| Tool Familiarity Score | Description |
+|------------------------|-------------|
+| < 2.5                  | Low         |
+| 2.5 – 3.9              | Medium      |
+| ≥ 4.0                  | High        |
+
+This metric helps evaluate whether the team is technically equipped to start and execute the project efficiently. Low tool familiarity may result in ramp-up delays, miscommunications, or technical errors during development.
+
+        
+        `,
       },
       {
         key: "legacy_system_involved",
         label: "Legacy System Involved",
-        description: "Whether integration with legacy systems required",
+        description: `
+        
+Indicates whether the project involves working with or upgrading an existing (**legacy**) system. Legacy systems often present technical challenges that can increase risk.
+
+## Calculation Method
+
+This is a **boolean** value ($true$ or $false$) determined through a **technical assessment** of the existing system.
+
+The value is set to **$true$** if the project’s success depends on integrating with, modifying, or replacing a system that meets **any** of the following conditions:
+
+- Built on **outdated or unsupported technology**
+- Has **little or no documentation**
+- Has **no access to original developers**
+- **Lacks automated test coverage**
+
+If **none** of these apply, the value is **$false$**.
+
+### Final Mapping
+
+| Legacy System Involvement | Description |
+|---------------------------|-------------|
+| $true$                    | Project involves a legacy system |
+| $false$                   | No legacy system involvement     |
+
+Working with legacy systems typically increases project complexity and risk due to poor maintainability, lack of institutional knowledge, and integration challenges.
+
+        
+        `,
       },
       {
         key: "tech_stack_familiarity",
         label: "Tech Stack Familiarity",
-        description: "Comfort with tech stack used",
+        description: `
+        
+Measures how familiar the team is with the **technologies** used in the project (e.g., programming languages, frameworks, databases). High familiarity reduces ramp-up time and increases development efficiency.
+
+## Calculation Method
+
+1. **Identify the core technologies** involved in the project (e.g., Python/Django, React, PostgreSQL).
+2. For each technology, calculate the **average years of experience** across the team.
+3. Assign **weights** to technologies based on their criticality (e.g., more weight to core backend/frontend frameworks).
+4. Compute the **weighted average** experience using the formula below.
+
+**Formula:**
+
+$$
+\\text{Familiarity Score} = \\sum (\\text{Weight}_i \\times \\text{AvgExperience}_i)
+$$
+
+Where:
+- $ \\text{Weight}_i $: Importance of technology $i$
+- $ \\text{AvgExperience}_i $: Average years of experience the team has with technology $i$
+
+> Note: The weights should sum to 1. Example: Backend (0.4), Frontend (0.3), Database (0.2), DevOps (0.1)
+
+## Final Mapping
+
+| Familiarity Score         | Description                         |
+|---------------------------|-------------------------------------|
+| **Low** (< 1.5 years)     | Limited team familiarity             |
+| **Medium** (1.5–2.9 years)| Moderate, working-level familiarity |
+| **High** (≥ 3 years)      | Strong expertise with tech stack     |
+
+This score helps estimate the team's efficiency and learning curve for the chosen tech stack.
+
+        
+        `,
       },
       {
         key: "testing_strategy",
         label: "Testing Strategy",
-        description: "Testing methods used",
+        description: `
+        
+Indicates the **primary method of testing** used in the project: automated testing, manual testing, or a combination of both. A higher degree of automation typically indicates better scalability and repeatability in testing.
+
+## Calculation Method
+
+Determine the **ratio of automated to total test cases**, either planned or based on actual implementation.
+
+**Formula:**
+
+$$
+\\text{Automation Ratio} = \\frac{\\text{Number of Automated Test Cases}}{\\text{Total Number of Test Cases}}
+$$
+
+Where:
+- **Automated Test Cases**: Tests executed using scripts/tools.
+- **Total Test Cases**: Includes both automated and manual test cases.
+
+## Final Mapping
+
+| Automation Ratio         | Description                        |
+|--------------------------|------------------------------------|
+| **Manual** (< 0.3)       | Primarily manual testing           |
+| **Mixed** (0.3–0.7)      | Balanced approach (manual + auto)  |
+| **Automated** (> 0.7)    | Predominantly automated testing    |
+
+Understanding the testing approach helps assess the project's test coverage efficiency and maintainability.
+
+        
+        `,
       },
     ],
   },
@@ -541,6 +751,65 @@ This produces a score on a 1–5 scale.
 export const projectSuccessStatus = {
   key: "success_status",
   label: "Project Success Status",
-  description:
-    "The estimated probability (0.0 to 1.0) that the project will be successful based on all the input factors.",
+  description: `
+  
+This attribute represents the **estimated probability (0.0 to 1.0)** that the project is successful, based on real outcomes. It is the **dependent variable** in the machine learning model, meaning it is **not provided as an input** during prediction but is instead the value the model learns to estimate.
+
+---
+
+## Important Clarification
+
+**This is the target variable the machine learning model aims to predict.**  
+It is **measured only after the project is completed**, based on real outcomes, and is **not an input attribute** like the others.
+
+---
+
+## Calculation Method (Post-Project)
+
+Project success is calculated as a **weighted score** that combines:
+- **Time adherence**
+- **Cost adherence**
+- **Quality delivered**
+- **Stakeholder satisfaction**
+
+### Formula:
+
+$$
+\\text{Success Score} = (W_t \\times S_t) + (W_c \\times S_c) + (W_q \\times S_q) + (W_s \\times S_s)
+$$
+
+Where:
+
+- $ S_t $: Time Score  
+
+  $$ S_t = 1 - \\frac{\\text{Actual Duration} - \\text{Planned Duration}}{\\text{Planned Duration}} $$
+  (Cap at 1.0 if completed early)
+
+- $ S_c $: Cost Score  
+
+  $ S_c = 1 - \\frac{\\text{Actual Cost} - \\text{Budget}}{\\text{Budget}} $ 
+  (Cap at 1.0 if under budget)
+
+- $ S_q $: Quality Score  
+
+  $ S_q = 1 - \\frac{\\text{Critical Bugs Post-Launch}}{\\text{Total Features}} $
+
+- $ S_s $: Stakeholder Satisfaction 
+
+  Obtained via post-project survey, normalized to 0–1
+
+- $ W_t, W_c, W_q, W_s $:  
+  Weights that sum to 1.0 and reflect stakeholder priorities.  
+  Example: If time is most important, $ W_t $ might be 0.4.
+
+---
+
+## Usage in the Model
+
+This **Success Score (0.0–1.0)** is the **label** used to train and evaluate the machine learning model.  
+The other 18 attributes are used as **predictors**.
+
+
+  
+  `,
 };
