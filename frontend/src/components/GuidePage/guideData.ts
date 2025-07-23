@@ -267,9 +267,31 @@ It reflects the budget that has been approved or committed by stakeholders or ma
     items: [
       {
         key: "org_structure_type",
-        label: "Org Structure Type",
+        label: "Organizational Structure",
         description: `
-        
+
+This attribute describes how the project team is **organizationally structured**. It influences authority levels, communication, and how resources are allocated. Team structures are typically categorized into:
+
+- **Projectized**: Team members are dedicated full-time, and the project manager has high authority.
+- **Matrix**: Team members report to both a functional manager and a project manager. The authority level of the project manager can vary:
+  - **Weak Matrix**: Functional manager holds more authority.
+  - **Balanced Matrix**: Authority is shared.
+  - **Strong Matrix**: Project manager has higher authority.
+- **Functional**: Work is conducted within a single department, and the functional manager holds the most authority.
+
+## Calculation Method
+
+Use a checklist or decision tree to determine the structure type:
+
+| Question                                                                                      | Answer | Resulting Structure |
+|-----------------------------------------------------------------------------------------------|--------|---------------------|
+| Is the Project Manager's authority high and are resources dedicated full-time to the project? | Yes    | **Projectized**     |
+| No → Do team members report to both a functional manager and a project manager?               | Yes    | **Matrix** (Weak/Balanced/Strong) |
+| No → Does the project work happen within a single department?                                 | Yes    | **Functional**      |
+
+### Reference
+
+This classification method aligns with standards in the **Project Management Body of Knowledge (PMBOK® Guide)**.
 
         
         `,
@@ -277,17 +299,112 @@ It reflects the budget that has been approved or committed by stakeholders or ma
       {
         key: "client_priority",
         label: "Client Priority",
-        description: "Whether time, cost, or quality is top priority",
+        description: `
+
+This attribute captures the **client’s primary objective** for the project—whether their main concern is minimizing **cost**, maximizing **quality**, or meeting a **tight deadline**. It reflects what the client values most and shapes decision-making throughout the project.
+
+## Calculation Method
+
+Conduct a **forced ranking exercise** with the client or product owner. Ask them to rank the following constraints of the **Project Management Triangle** from 1 (most important) to 3 (least important):
+
+- **Time**
+- **Cost**
+- **Quality**
+
+The constraint ranked **#1** is recorded as the value for this attribute.
+
+### Decision Logic
+
+| Client's Top Priority (Rank #1) | Attribute Value |
+|----------------------------------|-----------------|
+| Time                             | time          |
+| Cost                             | cost          |
+| Quality                          | quality       |
+
+### Reference
+
+This method directly addresses the trade-offs described in the classic **Project Management Triangle** (also known as the Iron Triangle):
+
+> R. Atkinson, *Project management: cost, time and quality, two best guesses and a phenomenon, it's time to accept other success criteria*, *International Journal of Project Management*, vol. 17, no. 6, pp. 337–342, 1999.
+> [Available online](https://doi.org/10.1016/S0263-7863%2898%2900069-6)
+
+        
+        `,
       },
       {
         key: "control_mechanism",
         label: "Control Mechanism",
-        description: "Monitoring tools and decision mechanisms used",
+        description: `
+         
+Describes how well project controls (e.g., monitoring, governance, audits) are established. This measures the rigor of project monitoring and control processes.
+
+### Calculation Method
+
+Use a checklist-based scoring system to assess the maturity of project control mechanisms.
+
+| Control Artifact                                                        | Points |
+|-------------------------------------------------------------------------|--------|
+| Project progress is tracked daily/weekly on a public dashboard (e.g., Jira, Azure DevOps) | +3     |
+| A formal change control process is defined and followed                 | +3     |
+| Regular governance meetings with stakeholders are held                 | +2     |
+| Quality gates or formal code reviews are mandatory                      | +2     |
+
+
+
+### Final Mapping
+
+| Total Points | Maturity Level |
+|--------------|----------------|
+| 0–3          | Weak           |
+| 4–7          | Moderate       |
+| >7           | Strong         |
+
+
+
+### Notes
+
+- **Project Controls**: Methods and tools used to monitor, guide, and evaluate the performance of a project. Examples include dashboards, governance reviews, and formal approval checkpoints.
+- This attribute reflects the discipline and transparency of project execution.
+
+        
+        `,
       },
       {
         key: "risk_management_score",
         label: "Risk Management Score",
-        description: "Preparedness and response to risks",
+        description: `
+        
+Indicates the quality and depth of the project's risk identification and mitigation planning. This can be scored based on the maturity of the risk management process.
+
+
+## Calculation Method
+
+Use a checklist-based scoring system to evaluate risk management practices.
+
+| Risk Management Artifact or Practice                                           | Points |
+|--------------------------------------------------------------------------------|--------|
+| A formal risk register exists                                                  | +3     |
+| 80% of identified risks have assigned owners and mitigation plans             | +3     |
+| The risk register is reviewed regularly (e.g., weekly/bi-weekly)              | +2     |
+| A contingency budget/buffer is allocated based on risk analysis               | +2     |
+
+
+
+### Final Mapping
+
+| Total Points | Risk Maturity Level |
+|--------------|---------------------|
+| 0–3          | Low                 |
+| 4–7          | Medium              |
+| >7           | High                |
+
+
+
+### Reference
+
+> Project Management Institute, *A Guide to the Project Management Body of Knowledge (PMBOK® Guide)*, 7th ed., Newtown Square, PA: PMI, 2021.
+        
+        `,
       },
     ],
   },
@@ -297,17 +414,90 @@ It reflects the budget that has been approved or committed by stakeholders or ma
       {
         key: "avg_dev_experience",
         label: "Avg Dev Experience",
-        description: "Average years of dev experience",
+        description: `
+        
+The average number of years of experience among developers in the team. This provides insight into team seniority and potential efficiency.
+
+
+## Calculation Method
+
+Collect the total years of professional software development experience from each developer and compute the average.
+
+**Formula:**
+
+$$
+\\text{Average Developer Experience} = \\frac{\\text{Sum of all developers' years of experience}}{\\text{Total number of developers}}
+$$
+
+This is a direct numerical input and not categorized or scored.
+
+
+        
+        `,
       },
       {
         key: "pm_experience",
         label: "PM Experience",
-        description: "Project manager’s experience in years",
+        description: `
+        
+The total number of years the project manager has spent managing projects. This provides insight into their capability to lead and mitigate delivery risks effectively.
+
+## Calculation Method
+
+Obtain the total years of experience the assigned project manager has in a project management role.
+
+**Formula:**
+
+$$
+\\text{Project Manager Experience} = \\text{Total years in a project management role}
+$$
+
+This is a direct numerical input and not categorized or scored.
+
+        
+        `,
       },
       {
         key: "team_sdlc_knowledge",
         label: "Team SDLC Knowledge",
-        description: "Familiarity with software lifecycle",
+        description: `
+        
+Indicates the team's familiarity and expertise with Software Development Life Cycle (SDLC) processes. A more experienced team is likely to handle planning, execution, and delivery more efficiently.
+
+**SDLC** refers to the structured approach used in developing software, covering all key phases: requirements gathering, design, development, testing, deployment, and maintenance.
+
+## Calculation Method
+
+Conduct a survey among all technical team members (developers, QA engineers, etc.) to rate their confidence or experience in major SDLC phases.
+
+Each team member rates the following on a scale of 1 to 5 (where 1 = No Experience, 5 = Expert):
+
+| Survey Question                                                                 | Description                                                |
+|----------------------------------------------------------------------------------|------------------------------------------------------------|
+| Requirements Analysis                                                            | Understanding and documenting what the software must do    |
+| System Design                                                                    | Designing architecture, components, and data flow          |
+| Agile/Scrum Ceremonies                                                           | Participation in daily standups, sprint planning, etc.     |
+| CI/CD Pipelines                                                                  | Familiarity with automated build, test, and deploy systems |
+| Quality Assurance (QA) Processes                                                 | Knowledge of testing techniques and bug tracking           |
+
+### Formula
+
+$$
+\\text{SDLC Familiarity Score} = \\frac{\\text{Sum of all team member ratings}}{\\text{Total number of ratings}}
+$$
+
+This produces a score on a 1–5 scale.
+
+### Final Mapping
+
+| SDLC Familiarity Score | Rating  |
+|------------------------|----------|
+| < 2.5                  | Low      |
+| 2.5 – 3.9              | Medium   |
+| ≥ 4.0                  | High     |
+
+        
+        `,
       },
       {
         key: "user_involvement",
