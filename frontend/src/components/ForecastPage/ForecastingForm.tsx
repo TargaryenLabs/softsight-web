@@ -197,7 +197,7 @@ const ForecastingForm = () => {
             <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block font-semibold text-gray-700 mb-1">
-                  Average Developer Experience (0–10)
+                  Average Developer Experience
                 </label>
                 <p className="text-sm  text-gray-500 mb-[10px]">
                   Average number of years your developers have been coding
@@ -207,7 +207,6 @@ const ForecastingForm = () => {
                   type="number"
                   name="avg_dev_experience"
                   min="0"
-                  max="10"
                   value={form.avg_dev_experience}
                   onChange={handleChange}
                   className="w-full border mt-[15px]  border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -216,7 +215,7 @@ const ForecastingForm = () => {
               </div>
               <div>
                 <label className="block font-semibold text-gray-700 mb-1">
-                  Project Manager Experience (0–10)
+                  Project Manager Experience
                 </label>
                 <p className="text-sm  text-gray-500 mb-[10px]">
                   Experience of the project manager in years. More experience
@@ -226,7 +225,6 @@ const ForecastingForm = () => {
                   type="number"
                   name="pm_experience"
                   min="0"
-                  max="10"
                   value={form.pm_experience}
                   onChange={handleChange}
                   className="w-full border mt-[15px]  border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
