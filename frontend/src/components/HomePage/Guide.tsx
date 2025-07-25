@@ -41,12 +41,12 @@ const Guide = () => {
           variants={fadeInUp}
           className="bg-white rounded-2xl p-8 shadow-lg w-full max-w-[600px] mt-10"
         >
-          <p className="text-[20px] text-blue-600 font-bold mb-2">Step 01</p>
+          <p className="text-[20px] text-[#0178d9] font-bold mb-2">Step 01</p>
           <h3 className="text-[28px] font-semibold text-gray-800">Input Your Project Details</h3>
           <p className="text-[15px] text-gray-600 mt-2">
             Enter key attributes like team size, experience, budget, and methodology. Our tool makes it simple.
           </p>
-          <div className="mt-6 animate-bounce items-center justify-center w-full flex text-blue-500">
+          <div className="mt-6 flex items-center justify-center w-full text-[#0178d9]">
             <PiArrowFatLinesDownFill size={40} />
           </div>
         </motion.div>
@@ -59,12 +59,12 @@ const Guide = () => {
           variants={fadeInUp}
           className="bg-white rounded-2xl p-8 shadow-lg w-full max-w-[600px] mt-10"
         >
-          <p className="text-[20px] text-blue-600 font-bold mb-2">Step 02</p>
+          <p className="text-[20px] text-[#0178d9] font-bold mb-2">Step 02</p>
           <h3 className="text-[28px] font-semibold text-gray-800">Predict Using Smart Algorithms</h3>
           <p className="text-[15px] text-gray-600 mt-2">
             Our forecasting engine analyses your inputs using patterns from real-world project outcomes.
           </p>
-          <div className="mt-6 animate-bounce items-center justify-center w-full flex text-blue-500">
+          <div className="mt-6 flex items-center justify-center w-full text-[#0178d9]">
             <PiArrowFatLinesDownFill size={40} />
           </div>
         </motion.div>
@@ -77,13 +77,12 @@ const Guide = () => {
           variants={fadeInUp}
           className="bg-white rounded-2xl p-8 shadow-lg w-full max-w-[600px] mt-10"
         >
-          <p className="text-[20px] text-blue-600 font-bold mb-2">Step 03</p>
+          <p className="text-[20px] text-[#0178d9] font-bold mb-2">Step 03</p>
           <h3 className="text-[28px] font-semibold text-gray-800">Get Actionable Insights</h3>
           <p className="text-[15px] text-gray-600 mt-2">
             View your success score and receive personalized tips to improve project outcomes.
           </p>
-
-          <div className="mt-6 animate-bounce items-center justify-center w-full flex text-blue-500">
+          <div className="mt-6 flex items-center justify-center w-full text-[#0178d9]">
             <MdOutlineDoneOutline size={40} />
           </div>
         </motion.div>
