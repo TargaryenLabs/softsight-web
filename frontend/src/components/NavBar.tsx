@@ -29,24 +29,24 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-12 text-[16px] font-medium text-gray-700">
-          <a href="/" className="hover:text-blue-600 transition duration-300">
+          <a href="/" className="hover:text-[#0178d9] transition duration-300">
             Home
           </a>
           <a
             href="/guide"
-            className="hover:text-blue-600 transition duration-300"
+            className="hover:text-[#0178d9] transition duration-300"
           >
             Guide
           </a>
           <a
             href="/forecast"
-            className="hover:text-blue-600 transition duration-300"
+            className="hover:text-[#0178d9] transition duration-300"
           >
             Forecast
           </a>
           <a
             href="/about-us"
-            className="hover:text-blue-600 transition duration-300"
+            className="hover:text-[#0178d9] transition duration-300"
           >
             About Us
           </a>
@@ -68,25 +68,25 @@ const Navbar = () => {
         <div className="md:hidden absolute top-[120px] w-[90%] max-w-[1400px] bg-white backdrop-blur-sm rounded-xl shadow-md p-6 text-center text-[16px] font-medium text-gray-700">
           <a
             href="/"
-            className="block py-2 hover:text-blue-600 transition duration-300"
+            className="block py-2 hover:text-[#0178d9] transition duration-300"
           >
             Home
           </a>
           <a
             href="/guide"
-            className="block py-2 hover:text-blue-600 transition duration-300"
+            className="block py-2 hover:text-[#0178d9] transition duration-300"
           >
             Guide
           </a>
           <a
             href="/forecast"
-            className="block py-2 hover:text-blue-600 transition duration-300"
+            className="block py-2 hover:text-[#0178d9] transition duration-300"
           >
             Forecast
           </a>
           <a
             href="/about-us"
-            className="block py-2 hover:text-blue-600 transition duration-300"
+            className="block py-2 hover:text-[#0178d9] transition duration-300"
           >
             About Us
           </a>
