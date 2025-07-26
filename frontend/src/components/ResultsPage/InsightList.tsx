@@ -1,54 +1,58 @@
-"use client"
-import { motion } from 'framer-motion';
-import { SiTicktick } from 'react-icons/si';
-import { CiWarning } from "react-icons/ci";
+"use client";
+import { motion } from "framer-motion";
 import { GiThink } from "react-icons/gi";
+import { SiTicktick } from "react-icons/si";
+import { CiWarning } from "react-icons/ci";
 
-const insights = [
-  {
-    type: <SiTicktick/> ,
-    label: "High Experience",
-    text: "Skilled teams are more adaptable and faster at problem-solving.",
-  },
-  {
-    type: <CiWarning />,
-    label: "Low Budget",
-    text: "Budget constraints may affect testing and QA. Prioritize core features.",
-  },
-  {
-    type: <CiWarning />,
-    label: "Low Client Involvement",
-    text: "Consider weekly check-ins to avoid misunderstandings and scope creep.",
-  },
-  {
-    type: <SiTicktick/> ,
-    label: "Agile Methodology",
-    text: "Agile improves flexibility and early feedback, increasing success rate.",
-  },
-];
+type Suggestion = {
+  title: string;
+  suggestion: string;
+};
 
-const InsightList = () => (
-    <motion.div
-    className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-gray-800 shadow-sm mt-8"
+type Props = {
+  suggestions: Suggestion[];
+};
+
+const InsightList = ({ suggestions }: Props) => (
+  <motion.div
+    className="bg-blue-50 border border-blue-200 rounded-xl p-6 text-gray-800 shadow-md mt-12"
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, ease: 'easeOut' }}
+    transition={{ duration: 0.5, ease: "easeOut" }}
     viewport={{ once: true, amount: 0.3 }}
   >
-    <h2 className="text-xl font-semibold text-gray-800 flex gap-2 items-center mb-4">
-      <p><GiThink /></p> Personalized Insights
+    <h2 className="text-2xl font-bold text-blue-900 flex gap-2 items-center mb-6">
+      <GiThink size={24} />
+      Personalized Insights
     </h2>
-    <ul className="space-y-4 text-left">
-      {insights.map((item, index) => (
-        <li className='flex gap-2' key={index}>
-          <strong className='flex items-center gap-2'>
-            {item.type} {item.label}:
-          </strong>{" "}
-          <span className="text-gray-600">{item.text}</span>
-        </li>
-      ))}
+    <ul className="space-y-5">
+      {suggestions.map((item, index) => {
+        const Icon = CiWarning;
+        const iconColor = "text-yellow-600";
+
+        return (
+          <li
+            key={index}
+            className="bg-white border border-gray-100 rounded-lg p-4 shadow-sm hover:shadow-md transition"
+          >
+            <div className="flex items-start gap-3">
+              <span className={`mt-1 ${iconColor}`}>
+                <Icon size={20} />
+              </span>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-1">
+                  {item.title}
+                </h4>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {item.suggestion}
+                </p>
+              </div>
+            </div>
+          </li>
+        );
+      })}
     </ul>
-    </motion.div>
+  </motion.div>
 );
 
 export default InsightList;
