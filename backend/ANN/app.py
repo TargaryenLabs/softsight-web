@@ -2,9 +2,19 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 # from ann_model import predict_success
 from llm_advisor import get_advice
+import random
+from dotenv import load_dotenv
+from langchain_community.vectorstores import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
 
 app = Flask(__name__)
 CORS(app)
+
+load_dotenv()
+embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+vectorstore = Chroma(persist_directory="./rag_db", embedding_function=embedding_model)
+retriever = vectorstore.as_retriever()
+
 
 def generate_nl_summary(data, success_score):
     return f"""
@@ -29,19 +39,27 @@ def generate_nl_summary(data, success_score):
 def predict():
     try:
         data = request.get_json()
-        # success_score = predict_success(data)
+        user_nl = generate_nl_summary(data, 0)  # Score not used yet
 
-        user_nl = generate_nl_summary(data, 20)
-        suggestions = get_advice(user_nl)
+        # 🔍 Similarity search with score (returns list of tuples: (doc, score))
+        similar_docs = vectorstore.similarity_search_with_score(user_nl, k=3)
+        retrieved_texts = [doc.page_content for doc, _ in similar_docs]
+        top_score = similar_docs[0][1] if similar_docs else random.uniform(0.3, 0.7)
+
+        # 🧠 Generate suggestions using top retrieved context
+        context = "\n\n".join(retrieved_texts)
+        prompt = f"{context}\n\nBased on the above, give advice for:\n{user_nl}"
+        suggestions = get_advice(prompt)
 
         return jsonify({
-            "prediction": 20,
-            # "probability": int(success_score * 100),
+            "prediction": int(top_score*100),
             "suggestions": suggestions
         })
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
     
 if __name__ == '__main__':
     app.run(debug=True)
