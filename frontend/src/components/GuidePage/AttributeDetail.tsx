@@ -19,9 +19,11 @@ type Props = {
 export const AttributeDetail = ({ selected }: Props) => {
   if (selected === "overview") {
     return (
-      <div>
-        <h2 className="text-2xl font-bold mb-4 text-indigo-700">Overview</h2>
-        <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+      <div className="p-4 max-w-screen-md mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-indigo-700">
+          Overview
+        </h2>
+        <p className="text-gray-700 whitespace-pre-line leading-relaxed text-sm md:text-base">
           {overviewText}
         </p>
       </div>
@@ -43,13 +45,13 @@ type Attribute = {
 };
 
 const AttributeBox = ({ attribute }: { attribute: Attribute }) => (
-  <div>
-    <h2 className="text-2xl font-bold mb-2 text-indigo-700">
+  <div className="p-4 max-w-screen-md overflow-auto mx-auto">
+    <h2 className="text-2xl md:text-3xl font-bold mb-2 text-indigo-700">
       {attribute.label}
     </h2>
 
-    <div className="bg-white text-black p-4 rounded shadow mb-4">
-      <div className="prose max-w-none text-black">
+    <div className="bg-white text-black p-4 rounded xl:shadow mb-4">
+      <div className="prose prose-sm sm:prose-base max-w-none text-black">
         <Markdown
           remarkPlugins={[remarkGfm, remarkMath]}
           rehypePlugins={[rehypeKatex]}
