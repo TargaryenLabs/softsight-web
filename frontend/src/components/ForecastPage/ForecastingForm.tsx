@@ -33,24 +33,30 @@ const ForecastingForm = () => {
   };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const res = await fetch("http://127.0.0.1:5000/predict", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+  const res = await fetch("http://127.0.0.1:5000/predict", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(form),
+  });
 
-    const data = await res.json();
-    console.log("🔍 API Response:", data);
+  const data = await res.json();
+  console.log("🔍 API Response:", data);
 
-    if (!data || data.prediction === undefined) {
-      alert("❌ Prediction failed. Check your API/server logs.");
-      return;
-    }
+  if (!data || data.prediction === undefined) {
+    alert("❌ Prediction failed. Check your API/server logs.");
+    return;
+  }
 
-    router.push(`/results?prediction=${data.probability}`);
-  };
+  // Store in sessionStorage
+  sessionStorage.setItem("prediction", data.prediction.toString());
+  sessionStorage.setItem("suggestions", JSON.stringify(data.suggestions));
+
+  // Redirect to results page
+  router.push("/results");
+};
+
 
   const renderSelect = (
     name: string,
