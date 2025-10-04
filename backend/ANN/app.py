@@ -14,7 +14,7 @@ load_dotenv()
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 vectorstore = Chroma(persist_directory="./rag_db", embedding_function=embedding_model)
 retriever = vectorstore.as_retriever()
-
+print("COLLECTION COUNT:", vectorstore._collection.count())
 
 def generate_nl_summary(data, success_score):
     return f"""
@@ -48,8 +48,8 @@ def predict():
 
         # 🧠 Generate suggestions using top retrieved context
         context = "\n\n".join(retrieved_texts)
-        prompt = f"{context}\n\nBased on the above, give advice for:\n{user_nl}"
-        suggestions = get_advice(prompt)
+        suggestions = get_advice(user_nl, context)
+        print(suggestions)
 
         return jsonify({
             "prediction": int(top_score*100),
