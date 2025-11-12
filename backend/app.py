@@ -84,9 +84,10 @@ def predict():
 
         # Predict
         prediction = model.predict(final_input)[0]
-        prediction_proba = model.predict_proba(final_input)[0][1]
+        prediction = int(prediction*100)
 
         user_nl = generate_nl_summary(data, 0) 
+
         # 🔍 Similarity search with score (returns list of tuples: (doc, score))
         similar_docs = vectorstore.similarity_search_with_score(user_nl, k=3)
         retrieved_texts = [doc.page_content for doc, _ in similar_docs]
@@ -94,9 +95,11 @@ def predict():
         # 🧠 Generate suggestions using top retrieved context
         context = "\n\n".join(retrieved_texts)
         suggestions = get_advice(user_nl, context)
-    
+
+        print("############# prediction : ", prediction)
+
         return jsonify({
-            "prediction": int(float(prediction_proba)*100),
+            "prediction": prediction,
             "suggestions": suggestions
         })
 
