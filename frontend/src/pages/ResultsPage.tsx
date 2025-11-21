@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import ForecastMeter from "../components/ResultsPage/ForecastMeter";
 import InsightList from "../components/ResultsPage/InsightList";
-import TipsList from "../components/ResultsPage/TipList";
 import { useEffect, useState } from "react";
 
 const ResultsPage = () => {

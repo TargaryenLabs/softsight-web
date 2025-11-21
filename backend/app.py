@@ -3,9 +3,37 @@ import pandas as pd
 import numpy as np
 import joblib
 from flask_cors import CORS
+from llm_advisor import get_advice
+from dotenv import load_dotenv
+from langchain_community.vectorstores import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
 
 app = Flask(__name__)
 CORS(app)
+
+
+load_dotenv()
+embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+vectorstore = Chroma(persist_directory="./rag_db", embedding_function=embedding_model)
+retriever = vectorstore.as_retriever()
+
+def generate_nl_summary(data, success_score):
+    return f"""
+    Project with {data['project_complexity']} complexity, {data['scope_clarity']} scope, and {data['urgency_level']} urgency.
+    Organizational structure was {data['org_structure_type']}, client prioritized {data['client_priority']}.
+    Avg dev experience: {data['avg_dev_experience']} years, PM experience: {data['pm_experience']} years.
+    Team SDLC knowledge: {data['team_sdlc_knowledge']}.
+    User involvement: {data['user_involvement']}. Tool familiarity: {data['tool_familiarity']}.
+    Legacy system: {data['legacy_system_involved']}.
+    Tech stack familiarity: {data['tech_stack_familiarity']}.
+    Testing strategy: {data['testing_strategy']}.
+    On schedule: {data['on_schedule']}.
+    Budget: {data['budget_estimation']}.
+    Communication: {data['communication_quality']}.
+    Risk management: {data['risk_management_score']}.
+    Controls: {data['control_mechanism']}.
+    success score : {success_score}
+    """
 
 # Load trained model and OneHotEncoder
 model = joblib.load('model.pkl')
@@ -56,11 +84,23 @@ def predict():
 
         # Predict
         prediction = model.predict(final_input)[0]
-        prediction_proba = model.predict_proba(final_input)[0][1]
+        prediction = int(prediction*100)
+
+        user_nl = generate_nl_summary(data, 0) 
+
+        # 🔍 Similarity search with score (returns list of tuples: (doc, score))
+        similar_docs = vectorstore.similarity_search_with_score(user_nl, k=3)
+        retrieved_texts = [doc.page_content for doc, _ in similar_docs]
+
+        # 🧠 Generate suggestions using top retrieved context
+        context = "\n\n".join(retrieved_texts)
+        suggestions = get_advice(user_nl, context)
+
+        print("############# prediction : ", prediction)
 
         return jsonify({
-            'prediction': 'YES' if prediction == 1 else 'NO',
-            'probability': int(float(prediction_proba)*100)
+            "prediction": prediction,
+            "suggestions": suggestions
         })
 
     except Exception as e:
