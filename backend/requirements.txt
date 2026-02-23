@@ -1,3 +1,12 @@
-xgboost
 flask
 flask-cors
+pandas
+numpy
+joblib
+python-dotenv
+langchain
+langchain-community
+langchain-huggingface
+langchain-groq
+chromadb
+sentence-transformers
