@@ -39,7 +39,7 @@ const ResultsPage = () => {
             </h1>
             {prediction !== null && <ForecastMeter percentage={prediction} />}
             <div className="mt-20">
-               <InsightList suggestions={suggestions} />
+               <InsightList suggestions={suggestions} />               <InsightList suggestions={suggestions} />               <InsightList suggestions={suggestions} />
             </div>
            
           </div>
